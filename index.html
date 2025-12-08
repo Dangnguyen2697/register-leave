@@ -121,6 +121,10 @@
         <form id="leaveForm">
             <label for="name">Họ và Tên</label>
             <input type="text" id="name" name="name" required>
+         
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
 
             <label for="type">Loại nghỉ phép</label>
             <select id="type" name="type" required>
@@ -156,6 +160,10 @@
     <script>
         // Vui lòng thay thế placeholder này bằng Webhook URL thực tế từ n8n của bạn
         const N8N_WEBHOOK_URL = 'https://n8n.novatria.cloud/webhook-test/5a854a5c-44ad-42cd-b191-5c193d9295bc';
+        function formatDateDDMMYYYY(dateStr) {
+        const [yyyy, mm, dd] = dateStr.split("-");
+        return `${dd}-${mm}-${yyyy}`;
+}
 
         document.getElementById("leaveForm").addEventListener("submit", async function (e) {
             e.preventDefault();
@@ -209,11 +217,12 @@
             const formData = {
                 name: document.getElementById("name").value,
                 type: document.getElementById("type").value,
-                leaveDate: leaveDateStr, // Gửi dưới dạng chuỗi YYYY-MM-DD
+                leaveDate: formatDateDDMMYYY(leaveDateStr), // Gửi dưới dạng chuỗi YYYY-MM-DD
                 days: days,
                 session: document.getElementById("session").value,
                 reason: document.getElementById("reason").value,
                 handover: document.getElementById("handover").value,
+                email: document.getElementById("email").value,
                 submissionTime: new Date().toISOString() // Đã thu thập thời gian gửi đơn
             };
 
@@ -256,6 +265,7 @@
 </body>
 
 </html>
+
 
 
 
