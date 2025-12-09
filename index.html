@@ -226,7 +226,7 @@
                 reason: document.getElementById("reason").value,
                 handover: document.getElementById("handover").value,
                 email: document.getElementById("email").value,
-                submissionTime: Date.now() // Đã thu thập thời gian gửi đơn
+                submissionTime: new Date().toISOString()// Đã thu thập thời gian gửi đơn
             };
 
             // Ghi log dữ liệu ra console để kiểm tra (tùy chọn)
@@ -268,6 +268,7 @@
 </body>
 
 </html>
+
 
 
 
