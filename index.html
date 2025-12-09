@@ -195,9 +195,12 @@
 
             // --- Bắt đầu Logic Kiểm tra Quy tắc (Client-side Validation) ---
             let errorMessage = '';
-
+         
+            if ( leaveDate < Date.now()){
+               errorMessage='Ngày nghỉ phải ở tương lai';
+            }
             // Quy tắc 1: Nghỉ > 3 ngày phải xin trước 30 ngày (diffDays >= 30)
-            if (days > 3 && diffDays < 30) {
+            else if (days > 3 && diffDays < 30) {
                 errorMessage = 'Nếu số ngày nghỉ lớn hơn 3, bạn phải nộp đơn trước ngày nghỉ tối thiểu 30 ngày.';
             }
             // Quy tắc 2: Nghỉ <= 3 ngày phải xin trước 3 ngày (diffDays >= 3)
@@ -223,7 +226,7 @@
                 reason: document.getElementById("reason").value,
                 handover: document.getElementById("handover").value,
                 email: document.getElementById("email").value,
-                submissionTime: new Date().toISOString() // Đã thu thập thời gian gửi đơn
+                submissionTime: Date.now() // Đã thu thập thời gian gửi đơn
             };
 
             // Ghi log dữ liệu ra console để kiểm tra (tùy chọn)
@@ -265,6 +268,7 @@
 </body>
 
 </html>
+
 
 
 
